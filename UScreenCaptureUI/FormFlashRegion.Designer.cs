@@ -42,7 +42,7 @@
             this.control1.Dock = System.Windows.Forms.DockStyle.Left;
             this.control1.Location = new System.Drawing.Point(0, 0);
             this.control1.Name = "control1";
-            this.control1.Size = new System.Drawing.Size(10, 266);
+            this.control1.Size = new System.Drawing.Size(10, 358);
             this.control1.TabIndex = 0;
             this.control1.Text = "control1";
             // 
@@ -50,9 +50,9 @@
             // 
             this.control2.BackColor = System.Drawing.Color.Lime;
             this.control2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.control2.Location = new System.Drawing.Point(10, 256);
+            this.control2.Location = new System.Drawing.Point(10, 348);
             this.control2.Name = "control2";
-            this.control2.Size = new System.Drawing.Size(282, 10);
+            this.control2.Size = new System.Drawing.Size(533, 10);
             this.control2.TabIndex = 1;
             this.control2.Text = "control2";
             // 
@@ -60,9 +60,9 @@
             // 
             this.control3.BackColor = System.Drawing.Color.Lime;
             this.control3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.control3.Location = new System.Drawing.Point(282, 0);
+            this.control3.Location = new System.Drawing.Point(533, 0);
             this.control3.Name = "control3";
-            this.control3.Size = new System.Drawing.Size(10, 256);
+            this.control3.Size = new System.Drawing.Size(10, 348);
             this.control3.TabIndex = 2;
             this.control3.Text = "control3";
             // 
@@ -72,7 +72,7 @@
             this.control4.Dock = System.Windows.Forms.DockStyle.Top;
             this.control4.Location = new System.Drawing.Point(10, 0);
             this.control4.Name = "control4";
-            this.control4.Size = new System.Drawing.Size(272, 10);
+            this.control4.Size = new System.Drawing.Size(523, 10);
             this.control4.TabIndex = 3;
             this.control4.Text = "control4";
             // 
@@ -87,7 +87,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(543, 358);
             this.Controls.Add(this.control4);
             this.Controls.Add(this.control3);
             this.Controls.Add(this.control2);
@@ -98,7 +98,6 @@
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormFlashRegion";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.Window;
             this.ResumeLayout(false);

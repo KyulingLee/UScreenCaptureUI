@@ -1,7 +1,9 @@
 UScreenCaptureUI
 ================
 
-A simple UI for Screen Capture DirectShow Source Filter (UScreenCapture) by Unreal Streaming Technologies, available [here](http://www.umediaserver.net/umediaserver/download.html).
+A simple UI for Screen Capture DirectShow Source Filter (UScreenCapture) by Unreal Streaming Technologies.
+
+It looks like UScreenCapture was abandoned by the developers and isn't available on official sources anymore, so this UI is just garbage now. Please look for a more complete software like [Open Broadcaster Software](https://obsproject.com/)
 
 Binaries on `dist` folder.
 

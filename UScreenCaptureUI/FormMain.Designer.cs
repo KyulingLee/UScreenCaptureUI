@@ -109,7 +109,7 @@
             // 
             this.numericUpDownFps.Location = new System.Drawing.Point(106, 14);
             this.numericUpDownFps.Maximum = new decimal(new int[] {
-            32768,
+            30,
             0,
             0,
             0});

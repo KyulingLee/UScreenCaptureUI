@@ -16,14 +16,17 @@ namespace UScreenCaptureUI
         public FormMain()
         {
             InitializeComponent();
+
             try
             {
                 Config = UScreenCaptureConfig.CreateFromRegistry();
             }
             catch
             {
-                MessageBox.Show("I couldn't detect UScreenCapture... Are you sure it's installed?");
-                Close();
+                MessageBox.Show("I couldn't detect UScreenCapture in your registry... Are you sure it's installed?\nI won't be able to write or read data from the registry.");
+
+                Config = new UScreenCaptureConfig();
+                buttonSaveToRegistry.Enabled = false;
             }
 
             numericUpDownRight.Value = Convert.ToInt32(Config.Right);
@@ -55,40 +58,40 @@ namespace UScreenCaptureUI
 
         private void numericUpDownTop_ValueChanged(object sender, EventArgs e)
         {
-            Config.Top = (uint) numericUpDownTop.Value;
+            Config.Top = (uint)numericUpDownTop.Value;
             numericUpDownBottom.Minimum = numericUpDownTop.Value;
         }
 
         private void numericUpDownRight_ValueChanged(object sender, EventArgs e)
         {
-            Config.Right = (uint) numericUpDownRight.Value;
+            Config.Right = (uint)numericUpDownRight.Value;
         }
 
         private void numericUpDownBottom_ValueChanged(object sender, EventArgs e)
         {
-            Config.Bottom = (uint) numericUpDownBottom.Value;
+            Config.Bottom = (uint)numericUpDownBottom.Value;
         }
 
         private void numericUpDownLeft_ValueChanged(object sender, EventArgs e)
         {
-            Config.Left = (uint) numericUpDownLeft.Value;
+            Config.Left = (uint)numericUpDownLeft.Value;
             numericUpDownRight.Minimum = numericUpDownLeft.Value;
         }
 
         private void numericUpDownFps_ValueChanged(object sender, EventArgs e)
         {
-            Config.FrameRate = (uint) numericUpDownFps.Value;
+            Config.FrameRate = (uint)numericUpDownFps.Value;
         }
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            FormFlashRegion f = new FormFlashRegion((int) Config.Top, (int) Config.Right, (int) Config.Bottom, (int) Config.Left);
+            FormFlashRegion f = new FormFlashRegion((int)Config.Top, (int)Config.Right, (int)Config.Bottom, (int)Config.Left);
             f.Show();
         }
 
         private void numericUpDownMonitor_ValueChanged(object sender, EventArgs e)
         {
-            Config.MonitorNum = (uint) numericUpDownMonitor.Value;
+            Config.MonitorNum = (uint)numericUpDownMonitor.Value;
         }
 
         private void checkBoxShowCursor_CheckedChanged(object sender, EventArgs e)
@@ -121,15 +124,20 @@ namespace UScreenCaptureUI
         public UInt32 FrameRate;
         public UInt32 ShowCursor;
         public UInt32 CaptureLayeredWindows;
+        public bool NoRegistry = true;
 
         public static UScreenCaptureConfig CreateFromRegistry()
         {
             UScreenCaptureConfig ret = new UScreenCaptureConfig();
 
-            ret.RegKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\UNREAL\Live\UScreenCapture", true);
+            ret.RegKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\UNREAL\Live\UScreenCapture", true) ??
+            Registry.CurrentUser.OpenSubKey(@"MACHINE\SOFTWARE\Wow6432Node\UNREAL\LIVE\UScreenCapture", true) ??
+            Registry.CurrentUser.OpenSubKey(@"Software\Classes\VirtualStore\MACHINE\SOFTWARE\Wow6432Node\UNREAL\LIVE\UScreenCapture", true);
 
             if (ret.RegKey == null)
                 throw new Exception("A chave não existe no registro.");
+
+            ret.NoRegistry = false;
 
             ret.MonitorNum = Convert.ToUInt32(ret.RegKey.GetValue("MonitorNum"));
             ret.Left = Convert.ToUInt32(ret.RegKey.GetValue("Left"));
@@ -145,6 +153,9 @@ namespace UScreenCaptureUI
 
         public void SaveToRegistry()
         {
+            if (NoRegistry)
+                return;
+
             RegKey.SetValue("MonitorNum", MonitorNum, RegistryValueKind.DWord);
             RegKey.SetValue("Left", Left, RegistryValueKind.DWord);
             RegKey.SetValue("Right", Right, RegistryValueKind.DWord);
